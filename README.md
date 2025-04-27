@@ -25,7 +25,7 @@
 
 ## 🚀 技術架構
 - 前端：HTML / CSS / JavaScript
-- 後端：Aws
+- 後端：Aws service
 - AI 技術：LLM（大型語言模型）+ RAG（檢索增強生成）
 - 資料來源：華新麗華內部產品規格資料、公開鋼材標準資料
 - 版本控制：GitHub
