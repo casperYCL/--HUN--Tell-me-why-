@@ -1,0 +1,542 @@
+/* Reset + 字體設定 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 主要佈局 */
+.main-layout {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* ✅ 防止整個layout自己滾動 */
+}
+
+.sidebar {
+    width: 20%;
+    height: 100vh;
+    background-color: #2f3640;
+    color: white;
+    padding: 20px;
+    overflow-y: auto; /* ✅ 左邊自己滾動 */
+    border-right: 2px solid #1f1f1f;
+}
+
+.sidebar.collapsed {
+    width: 60px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.sidebar.collapsed #new-chat-btn,
+.sidebar.collapsed h2,
+.sidebar.collapsed ul {
+    display: none;
+}
+
+/* 中間聊天內容 */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto; /* ✅ 右邊自己滾動 */
+    background-color: rgb(45, 52, 59);
+}
+
+/* 左邊收合按鈕 */
+#toggle-sidebar-btn, #new-chat-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#toggle-sidebar-btn:hover, #new-chat-btn:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* 聊天室清單 */
+#question-history {
+    list-style: none;
+    padding-left: 0;
+}
+
+#question-history li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 把文字和筆分開 */
+}
+
+#question-history li:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.chat-name {
+    flex-grow: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+
+.edit-btn {
+    margin-left: 8px;
+    color: #aaa;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.edit-btn:hover {
+    color: white;
+}
+
+.edit-input {
+    flex-grow: 1;
+    padding: 8px 12px;
+    margin-right: 10px;
+    border-radius: 8px;
+    background-color: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+/* 上方選單 */
+.chat-settings {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px 0 20px;
+    background-color: rgb(45, 52, 59);
+    position: relative;
+}
+
+.chat-settings select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    text-align: center;
+    text-align-last: center;
+    transition: background-color 0.3s;
+}
+
+.chat-settings select:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* 保存對話按鈕+下拉 */
+.save-chat-container {
+    position: relative;
+}
+
+#save-chat-btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#save-chat-btn:hover {
+    background-color: rgba(0,0,0,0.7);
+}
+
+#save-options {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    background-color: #2f3640;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.save-option {
+    padding: 10px 20px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.save-option:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.hidden {
+    display: none;
+}
+
+/* 聊天內容區 */
+.chat-container {
+    flex: 1;
+    background-color: rgb(45, 52, 59);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+    overflow-y: auto;
+}
+
+/* 聊天訊息區 */
+.user-chat-box,
+.ai-chat-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.user-chat-box {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.ai-chat-box {
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+/* 氣泡 */
+.user-chat-area,
+.ai-chat-area {
+    max-width: 70%;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.361);
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 30px;
+    box-shadow: 2px 2px 10px black;
+    word-break: break-word;
+}
+
+.user-chat-area {
+    background-color: black;
+    border-radius: 40px 0px 40px 40px;
+}
+
+/* 頭像設定 */
+.chat-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: drop-shadow(2px 2px 10px black);
+}
+
+/* 上傳圖片 */
+.chooseimg {
+    width: 30%;
+    border-radius: 30px;
+    margin-top: 10px;
+}
+
+.user-chat-area {
+    display: inline-flex; /* 🔥 重點1：inline-flex，氣泡寬度跟內容走 */
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    max-width: 70%;
+    word-break: break-word;
+    gap: 10px;
+}
+
+/* 上傳的圖片樣式 */
+.user-chat-area img.chooseimg {
+    max-width: 300px; /* 🔥 圖片最多寬 300px */
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 下方輸入區 */
+.prompt-area {
+    flex-shrink: 0;
+    width: 100%;
+    background-color: rgb(45, 52, 59);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.prompt-area input {
+    width: 50%;
+    height: 80px;
+    background-color: black;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    padding: 20px;
+    color: white;
+    font-size: 20px;
+    box-shadow: 2px 2px 10px black;
+}
+
+.prompt-area button {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: black;
+    border: none;
+    box-shadow: 2px 2px 10px black;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.prompt-area button:hover {
+    background-color: rgba(0, 0, 0, 0.338);
+}
+
+/* 特效設定 */
+.load {
+    filter: drop-shadow(2px 2px 10px black);
+}
+
+.choose {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+#image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: black;
+    box-shadow: 2px 2px 10px black;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* 小圖icon本體 */
+/* 小圖icon本體 */
+#image img {
+    width: 50%; /* 🔥 原本是70%，改小一點就好 */
+    height: 50%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+
+
+/* 響應式 */
+@media (max-width: 600px) {
+    .user-chat-area,
+    .ai-chat-area {
+        max-width: 90%;
+    }
+
+    .chat-avatar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .prompt-area input {
+        width: 70%;
+    }
+}
+
+.edit-input {
+    flex-grow: 1;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    margin-right: 8px;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    outline: none;
+}
+
+.chat-title-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 讓名稱靠左，筆靠右 */
+}
+
+/* 麥克風錄音時的呼吸效果 */
+#voice.recording {
+    animation: breathing 1.5s infinite ease-in-out;
+    background-color: rgba(255, 0, 0, 0.6); /* 錄音時背景稍微變紅一點 */
+}
+
+/* 呼吸動畫關鍵影格 */
+@keyframes breathing {
+    0% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 0, 0, 0.8); }
+    50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(255, 0, 0, 1); }
+    100% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 0, 0, 0.8); }
+}
+
+/*修改頁面-在一開始就保留滾輪的位置，不要等滾輪出現才擠壓版面*/
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 100vh;
+    overflow: hidden; /* ✅ body 禁止滾動 */
+}
+
+/*美化右側滾輪*/
+/* ✅ 美化滾輪樣式：讓滾輪細緻、漂亮、順滑 */
+/* -- Chrome / Edge / Safari -- */
+body::-webkit-scrollbar,
+.chat-container::-webkit-scrollbar {
+    width: 8px; /* 滾輪變細 */
+    height: 8px; /* 橫向滾輪（若有的話）也變細 */
+}
+
+body::-webkit-scrollbar-track,
+.chat-container::-webkit-scrollbar-track {
+    background: transparent; /* 滾輪底透明 */
+}
+
+body::-webkit-scrollbar-thumb,
+.chat-container::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3); /* 滑塊淡白色 */
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+/* -- Firefox -- */
+body,
+.chat-container {
+    scrollbar-width: thin; /* 細滾輪 */
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent; /* 滑塊色 + 背景透明 */
+}
+
+/*將上傳的樣式變好看*/
+.uploaded-file {
+    margin-bottom: 10px;
+    background-color: rgba(255,255,255,0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: white;
+}
+
+/*小圖樣式*/
+.file-icon {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    padding: 8px;
+    object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 10px black;
+}
+
+.file-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 2px 2px 10px black;
+}
+
+.file-icon-wrapper img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+/* 上傳中時，整個按鈕亮起來 */
+#image.uploading, 
+#image.uploading .file-icon-wrapper {
+    background-color: rgba(255, 255, 255, 0.1); /* 變亮色 */
+    transition: background-color 0.3s;
+}
+
+#image.uploading {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#image.uploading img {
+    filter: brightness(1.2); /* 小icon也一起變亮 */
+}
+
+/* 🔥滑鼠hover時：整個按鈕亮起來＋icon也亮 */
+#image:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#image:hover img {
+    filter: brightness(1.2);
+}
+
+.plus-icon {
+    width: 50px;
+    height: 50px;
+    padding: 8px;
+    border-radius: 50%;
+    background-color: black;
+    object-fit: contain;
+    box-shadow: 2px 2px 10px black;
+    transition: background-color 0.3s, filter 0.3s;
+}
+
+/* 滑鼠移上去亮起來 */
+#image:hover .plus-icon {
+    background-color: rgba(255, 255, 255, 0.2);
+    filter: brightness(1.2);
+}

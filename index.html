@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>華新麗華專屬AI智能問答平台，快速解答、提升效率</title>
+  <link rel="icon" type="image/png" href="ai.png">
+  <meta name="description" content="華新麗華專屬AI智能問答平台，快速解答、提升效率。">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script type="module" src="font.js"></script> 
+  <script type="module" src="script.js"></script>
+</body>
+</html>
+
+</head>
+<body>
+  <div class="main-layout">
+    <!-- 左側提問紀錄欄 -->
+    <div class="sidebar">
+        <button id="toggle-sidebar-btn">華新麗華-AI助手</button>
+      <button id="new-chat-btn">＋ 新增聊天室</button>
+
+      <h2>提問紀錄</h2>
+      <ul id="question-history"></ul>
+    </div>
+
+    <!-- 右側聊天與輸入區 -->
+    <div class="content">
+      <!-- 上方設定 -->
+      <div class="chat-settings">
+        <select id="language-select">
+          <option value="zh">中文</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+        </select>
+
+        <select id="model-select">
+          <option value="" hidden>選擇模型</option>
+          <option value="gemini-1.5-flash">claude-3-haiku</option>
+        </select>
+
+        <select id="save-select" class="save-btn">
+          <option value="" hidden>保存聊天內容</option>
+          <option value="txt">保存為 TXT</option>
+      </select>
+      
+      </div>
+
+      <!-- 聊天訊息顯示區 -->
+      <div class="chat-container">
+        <div class="ai-chat-box">
+          <img src="ai.png" alt="AI" class="chat-avatar">
+          <div class="ai-chat-area">
+            Hello! How Can I Help You Today?
+          </div>
+        </div>
+      </div>
+
+      <!-- 下方輸入訊息區 -->
+      <div class="prompt-area">
+        <input type="text" id="prompt" placeholder="Message...">
+        <button id="image">
+          <img src="img2.svg" alt="Upload Image">
+          <input type="file" accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden>
+        </button>
+        <button id="submit">
+          <img src="submit.svg" alt="Send">
+        </button>
+        <button id="voice">
+          <img src="mic.svg" alt="Voice">
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

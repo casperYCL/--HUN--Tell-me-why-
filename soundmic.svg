@@ -1,0 +1,24 @@
+<!-- mic-recording.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none">
+  <!-- 麥克風本體 -->
+  <path d="M16 4C14.9 4 14 4.9 14 6V14C14 15.1 14.9 16 16 16C17.1 16 18 15.1 18 14V6C18 4.9 17.1 4 16 4Z"
+        stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 麥克風外圍 -->
+  <path d="M22 13V14C22 17.3 19.3 20 16 20C12.7 20 10 17.3 10 14V13"
+        stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 支架 -->
+  <path d="M16 20V24" stroke="red" stroke-width="2" stroke-linecap="round"/>
+  <path d="M12 28H20" stroke="red" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- 聲波左 -->
+  <path d="M6 10V12" stroke="red" stroke-width="2" stroke-linecap="round"/>
+  <path d="M6 16V18" stroke="red" stroke-width="2" stroke-linecap="round"/>
+  <path d="M4 13.5V14.5" stroke="red" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- 聲波右 -->
+  <path d="M26 10V12" stroke="red" stroke-width="2" stroke-linecap="round"/>
+  <path d="M26 16V18" stroke="red" stroke-width="2" stroke-linecap="round"/>
+  <path d="M28 13.5V14.5" stroke="red" stroke-width="2" stroke-linecap="round"/>
+</svg>
